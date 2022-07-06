@@ -18,4 +18,14 @@ class Favorite extends Model
         'user_id',
         'shop_id',
     ];
+
+    public function shop()
+    {
+        return $this->hasOne(Shop::class, 'id', 'shop_id');
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

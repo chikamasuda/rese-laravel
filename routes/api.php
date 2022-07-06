@@ -25,6 +25,16 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/v1/users/registration', 'register');
 });
 
+//飲食店情報
+Route::controller(ShopController::class)->group(function () {
+    //飲食店一覧
+    Route::get('/v1/shops/', 'index');
+    //飲食店検索
+    Route::get('/v1/shops/search', 'search');
+    //飲食店詳細
+    Route::get('/v1/shops/{shop}', 'show');
+});
+
 Route::group(['middleware' => 'auth:api',], function () {
 
     //認証
@@ -33,16 +43,6 @@ Route::group(['middleware' => 'auth:api',], function () {
         Route::get('/v1/users', 'me');
         //ログアウト
         Route::post('/v1/users/logout', 'logout');
-    });
-
-    //飲食店情報
-    Route::controller(ShopController::class)->group(function () {
-        //飲食店一覧
-        Route::get('/v1/shops/', 'index');
-        //飲食店検索
-        Route::get('/v1/shops/search', 'search');
-        //飲食店詳細
-        Route::get('/v1/shops/{shop}', 'show');
     });
 
     //お気に入り機能

@@ -34,6 +34,15 @@ class ReservationsTableSeeder extends Seeder
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
+            [
+                'id' => '3',
+                'user_id' => '1',
+                'shop_id' => '1',
+                'date' => '2022-08-04 9:00:00',
+                'number' => '1',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
         ]);
     }
 }

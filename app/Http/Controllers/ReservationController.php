@@ -16,7 +16,7 @@ class ReservationController extends Controller
      */
     public function index(User $user)
     {
-        $reservations = Reservation::where('user_id', $user->id)->get();
+        $reservations = Reservation::with(['shop', 'user'])->where('user_id', $user->id)->get();
 
         return response()->json(['reservations' => $reservations], 200);
     }
