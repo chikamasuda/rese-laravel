@@ -16,13 +16,13 @@ class Reservation extends Model
         'number',
     ];
 
-    public function shop()
+    /**
+     * shopsテーブルとのリレーション 
+     *
+     * @return void
+     */
+    public function shops()
     {
-        return $this->hasOne(Shop::class, 'id', 'shop_id');
-    }
-
-    public function user()
-    {
-        return $this->hasOne(User::class, 'id', 'user_id');
+        return $this->belongsTo(Shop::class, 'shop_id');
     }
 }

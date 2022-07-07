@@ -9,6 +9,11 @@ class Area extends Model
 {
     use HasFactory;
 
+    /**
+     * shopsテーブルとのリレーション 
+     *
+     * @return void
+     */
     public function shop()
     {
         return $this->hasOne(Shop::class, 'area_id');

@@ -19,11 +19,21 @@ class Favorite extends Model
         'shop_id',
     ];
 
+    /**
+     * shopsテーブルとのリレーション 
+     *
+     * @return void
+     */
     public function shops()
     {
         return $this->belongsTo(Shop::class, 'shop_id');
     }
 
+    /**
+     * usersテーブルとのリレーション 
+     *
+     * @return void
+     */
     public function users()
     {
         return $this->belongsTo(User::class);
