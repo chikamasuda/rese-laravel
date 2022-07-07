@@ -1,6 +1,6 @@
 <?php
 return [
-    'paths' => ['api/v1/*', 'login', 'logout', 'favorites'],
+    'paths' => ['api/v1/*'],
     'allowed_methods' => ['*'],
     'allowed_origins' => ['*'],
     'allowed_origins_patterns' => [],
