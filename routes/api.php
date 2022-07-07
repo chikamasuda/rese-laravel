@@ -50,7 +50,7 @@ Route::group(['middleware' => 'auth:api',], function () {
         //お気に入り一覧
         Route::get('/v1/users/{user}/favorites', 'index');
         //お気に入り追加
-        Route::post('/v1/favorites/', 'store');
+        Route::post('/v1/favorites', 'store');
         //お気に入り削除
         Route::delete('/v1/favorites/{favorite}', 'destroy');
     });
