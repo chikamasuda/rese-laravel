@@ -57,11 +57,11 @@ Route::group(['middleware' => 'auth:api',], function () {
 
     //予約機能
     Route::controller(ReservationController::class)->group(function () {
+        //予約削除
+        Route::delete('/v1/reservations/{reservation}', 'destroy');
         //予約一覧
         Route::get('/v1/users/{user}/reservations', 'index');
         //予約追加
         Route::post('/v1/reservations/', 'store');
-        //予約削除
-        Route::delete('/v1/reservations/{reservation}', 'destroy');
     });
 });

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Shop;
+use App\Models\Area;
+use App\Models\Genre;
 use Illuminate\Support\Facades\DB;
 
 class ShopController extends Controller
@@ -17,7 +19,11 @@ class ShopController extends Controller
     {
         $shops = Shop::with(['area', 'genre', 'favorites'])->get();
 
-        return response()->json(['shops' => $shops], 200);
+        $areas = Area::all()->pluck('name');
+
+        $genres = Genre::all()->pluck('name');
+
+        return response()->json(['shops' => $shops, 'areas' => $areas, 'genres' => $genres], 200);
     }
 
     /**
