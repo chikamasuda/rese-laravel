@@ -15,7 +15,7 @@ class ShopController extends Controller
      */
     public function index()
     {
-        $shops = Shop::with(['area', 'genre'])->get();
+        $shops = Shop::with(['area', 'genre', 'favorites'])->get();
 
         return response()->json(['shops' => $shops], 200);
     }

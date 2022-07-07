@@ -18,4 +18,9 @@ class Shop extends Model
     {
         return $this->hasOne(Genre::class, 'id', 'genre_id');
     }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
 }

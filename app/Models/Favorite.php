@@ -19,13 +19,13 @@ class Favorite extends Model
         'shop_id',
     ];
 
-    public function shop()
+    public function shops()
     {
-        return $this->hasOne(Shop::class, 'id', 'shop_id');
+        return $this->belongsTo(Shop::class, 'shop_id');
     }
 
-    public function user()
+    public function users()
     {
-        return $this->hasOne(User::class, 'id', 'user_id');
+        return $this->belongsTo(User::class);
     }
 }
