@@ -19,11 +19,7 @@ class ShopController extends Controller
     {
         $shops = Shop::with(['area', 'genre', 'favorites'])->get();
 
-        $areas = Area::all()->pluck('name');
-
-        $genres = Genre::all()->pluck('name');
-
-        return response()->json(['shops' => $shops, 'areas' => $areas, 'genres' => $genres,], 200);
+        return response()->json(['shops' => $shops], 200);
     }
 
     /**
