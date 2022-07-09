@@ -23,7 +23,7 @@ class ShopController extends Controller
 
         $genres = Genre::all()->pluck('name');
 
-        return response()->json(['shops' => $shops, 'areas' => $areas, 'genres' => $genres], 200);
+        return response()->json(['shops' => $shops, 'areas' => $areas, 'genres' => $genres,], 200);
     }
 
     /**
@@ -51,17 +51,21 @@ class ShopController extends Controller
      */
     public function search(Request $request)
     {
-        $query = Shop::query();
-        $area_id = $request->area_id;
-        $genre_id = $request->genre_id;
+        $query = Shop::with(['area', 'genre', 'favorites']);
+        $area = $request->area;
+        $genre = $request->genre;
         $keyword = $request->keyword;
 
-        if (!empty($area_id)) {
-            $query->where('area_id', $area_id);
+        if (!empty($area) && $area !== 'All area') {
+            $query->whereHas('area',  function ($query) use ($area) {
+                $query->where('name', $area);
+            });
         }
 
-        if (!empty($genre_id)) {
-            $query->where('genre_id', $genre_id);
+        if (!empty($genre) && $genre !== 'All genre') {
+            $query->whereHas('genre',  function ($query) use ($genre) {
+                $query->where('name', $genre);
+            });
         }
 
         if (!empty($keyword)) {
