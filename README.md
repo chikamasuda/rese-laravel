@@ -1,4 +1,12 @@
-# 環境構築方法
+# 概要
+WebアプリケーションReseのバックエンドリポジトリ。  
+Webアプリ概要については、以下のReseのフロントエンドリポジトリに記載。  
+
+フロントエンドリポジトリURL：  
+https://github.com/chikamasuda/rese-nuxt
+
+
+# 環境構築方法(Laravel Sail)
 
 ## 前提条件　　
 ・Laravel sailを用いて環境構築している。  
