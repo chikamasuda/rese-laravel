@@ -94,7 +94,7 @@ sail artisan key:generate
 sail stop
 ```
 
-②DockerのMysql起動（phpmyadminの起動はhttp://localhost:8080　）
+②DockerのMysql起動
 ```
 sail mysql
 ```
