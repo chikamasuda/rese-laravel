@@ -11,13 +11,12 @@ https://github.com/chikamasuda/rese-nuxt
 ## 前提条件　　
 ・Laravel sailを用いて環境構築している。  
 ・Docker Desktopのデスクトップアプリをインストールし、Dockerの状態が「Docker Desktop is running」であること。  
-・GitHub上でSSH Keyが設定されている。  
 
 
 ## 環境構築
 ①git cloneする
 ```
-git clone git@github.com:Builwing-Inc/win6-laravel.git
+git clone https://github.com/chikamasuda/rese-laravel.git
 ```
 
 ②エディタ上の開くボタンでcloneしたファイルを開く。  
