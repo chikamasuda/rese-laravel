@@ -61,6 +61,23 @@ class ReservationController extends Controller
     }
 
     /**
+     * 予約削除
+     *
+     * @param Favorite $favorite
+     * @return void
+     */
+    public function destroy(Reservation $reservation)
+    {
+        $reservation = Reservation::where('id', $reservation->id)->delete();
+
+        if ($reservation) {
+            return response()->json(['message' => 'Deleted successfully'], 200);
+        } else {
+            return response()->json(['message' => 'Not found'], 404);
+        }
+    }
+
+    /**
      * 予約変更
      *
      * @param Reservation $reservation
