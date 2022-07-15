@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Reservation;
+use Illuminate\Support\Carbon;
 
 class ReservationController extends Controller
 {
@@ -16,7 +17,10 @@ class ReservationController extends Controller
      */
     public function index(User $user)
     {
-        $reservations = Reservation::with('shops')->where('user_id', $user->id)->get();
+        $reservations = Reservation::with('shops')
+            ->where('user_id', $user->id)
+            ->where('date', '>=', Carbon::now())
+            ->get();
 
         return response()->json(['reservations' => $reservations], 200);
     }
@@ -40,19 +44,42 @@ class ReservationController extends Controller
     }
 
     /**
-     * 予約削除
+     * 予約詳細
      *
      * @param Favorite $favorite
      * @return void
      */
-    public function destroy(Reservation $reservation)
+    public function show(Reservation $reservation)
     {
-        $reservation = Reservation::where('id', $reservation->id)->delete();
+        $reservation = Reservation::where('id', $reservation->id)->get();
 
         if ($reservation) {
-            return response()->json(['message' => 'Deleted successfully'], 200);
+            return response()->json(['reservation' => $reservation], 200);
         } else {
             return response()->json(['message' => 'Not found'], 404);
+        }
+    }
+
+    /**
+     * 予約変更
+     *
+     * @param Reservation $reservation
+     * @return void
+     */
+    public function update(Request $request, Reservation $reservation)
+    {
+        $update = [
+            "user_id" =>  $request->user_id,
+            "shop_id" =>  $request->shop_id,
+            "date"    =>  $request->date,
+            "number"  =>  $request->number,
+        ];
+
+        $reservation = Reservation::where('id', $reservation->id)->update($update);
+        if ($reservation) {
+            return response()->json(['reservation' => $reservation], 200);
+        } else {
+            return response()->json(['message' => 'Not found', 404]);
         }
     }
 }

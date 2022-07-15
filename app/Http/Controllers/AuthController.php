@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -40,13 +41,8 @@ class AuthController extends Controller
      * @param Request $request
      * @return void
      */
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $request->validate([
-            'email' => 'email|required',
-            'password' => 'required|min:8'
-        ]);
-
         //ユーザー情報取得
         $user = User::where('email', $request->email)->first();
 

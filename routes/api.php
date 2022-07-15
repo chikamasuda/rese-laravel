@@ -57,6 +57,10 @@ Route::group(['middleware' => 'auth:api',], function () {
 
     //予約機能
     Route::controller(ReservationController::class)->group(function () {
+        //予約詳細
+        Route::get('/v1/reservations/{reservation}', 'show');
+        //予約変更
+        Route::put('/v1/reservations/{reservation}', 'update');
         //予約削除
         Route::delete('/v1/reservations/{reservation}', 'destroy');
         //予約一覧
