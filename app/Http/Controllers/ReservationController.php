@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ReservationRequest;
 use App\Models\User;
 use App\Models\Reservation;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class ReservationController extends Controller
 {
@@ -31,7 +33,7 @@ class ReservationController extends Controller
      * @param Request $request
      * @return void
      */
-    public function store(Request $request)
+    public function store(ReservationRequest $request)
     {
         $reservations = Reservation::create([
             "user_id" =>  $request->user_id,
@@ -39,6 +41,8 @@ class ReservationController extends Controller
             "date"    =>  $request->date,
             "number"  =>  $request->number,
         ]);
+
+        Log::info($reservations);
 
         return response()->json(['reservations' => $reservations], 201);
     }
@@ -83,9 +87,8 @@ class ReservationController extends Controller
      * @param Reservation $reservation
      * @return void
      */
-    public function update(Request $request, Reservation $reservation)
+    public function update(ReservationRequest $request, Reservation $reservation)
     {
-        var_dump($request->date);
         $update = [
             "user_id" =>  $request->user_id,
             "shop_id" =>  $request->shop_id,

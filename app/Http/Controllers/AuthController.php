@@ -18,11 +18,11 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
-        $validated_data = $request->validate([
-            'name' => 'required|max:191',
-            'email' => 'email|required|unique:users',
-            'password' => 'required|min:8'
-        ]);
+        $validated_data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password
+        ];
 
         $validated_data['password'] = bcrypt($request->password);
 
