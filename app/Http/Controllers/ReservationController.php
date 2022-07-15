@@ -51,7 +51,7 @@ class ReservationController extends Controller
      */
     public function show(Reservation $reservation)
     {
-        $reservation = Reservation::where('id', $reservation->id)->get();
+        $reservation = Reservation::with('shops')->where('id', $reservation->id)->get();
 
         if ($reservation) {
             return response()->json(['reservation' => $reservation], 200);
@@ -85,6 +85,7 @@ class ReservationController extends Controller
      */
     public function update(Request $request, Reservation $reservation)
     {
+        var_dump($request->date);
         $update = [
             "user_id" =>  $request->user_id,
             "shop_id" =>  $request->shop_id,
@@ -93,8 +94,9 @@ class ReservationController extends Controller
         ];
 
         $reservation = Reservation::where('id', $reservation->id)->update($update);
+
         if ($reservation) {
-            return response()->json(['reservation' => $reservation], 200);
+            return response()->json(['message' => 'Updated successfully'], 200);
         } else {
             return response()->json(['message' => 'Not found', 404]);
         }
