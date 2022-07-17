@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reservations', function (Blueprint $table) {
+        Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');;
-            $table->foreignId('shop_id')->constrained('shops')->onDelete('cascade');;
-            $table->dateTime('date');
-            $table->integer('number');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('shop_id')->constrained('shops')->onDelete('cascade');
+            $table->unsignedDecimal('rating', 8, 2);
+            $table->text('comment')->comment('評価コメント');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reservations');
+        Schema::dropIfExists('reviews');
     }
 };

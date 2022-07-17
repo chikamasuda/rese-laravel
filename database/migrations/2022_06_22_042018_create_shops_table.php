@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('area_id')->constrained('areas');
-            $table->foreignId('genre_id')->constrained('genres');
+            $table->foreignId('area_id')->constrained('areas')->onDelete('cascade');;
+            $table->foreignId('genre_id')->constrained('genres')->onDelete('cascade');;
             $table->string('name');
             $table->text('description');
             $table->string('image_url');
