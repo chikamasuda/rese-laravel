@@ -36,7 +36,7 @@ Route::controller(ShopController::class)->group(function () {
     Route::get('/v1/shops/{shop}', 'show');
 });
 
-Route::group(['middleware' => 'auth:api',], function () {
+Route::group(['middleware' => 'auth:api'], function () {
 
     //認証
     Route::controller(AuthController::class)->group(function () {
@@ -74,5 +74,7 @@ Route::group(['middleware' => 'auth:api',], function () {
     Route::controller(ReviewController::class)->group(function () {
         //レビュー追加
         Route::post('/v1/reviews/', 'store');
+        //来店済かチェック
+        Route::get('/v1/is-arrived/', 'is_arrived');
     });
 });

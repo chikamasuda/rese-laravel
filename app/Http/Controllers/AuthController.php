@@ -7,6 +7,7 @@ use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
@@ -26,8 +27,8 @@ class AuthController extends Controller
 
         $validated_data['password'] = bcrypt($request->password);
 
-        //ユーザー情報登録
-        $user = User::create($validated_data);
+        //ユーザー登録とメール送信
+        event(new Registered($user = User::create($validated_data)));
 
         //トークン発行
         $token = $user->createToken('authToken')->accessToken;

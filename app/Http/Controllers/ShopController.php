@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Shop;
 use App\Models\Area;
 use App\Models\Genre;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Reservation;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class ShopController extends Controller
@@ -28,8 +32,9 @@ class ShopController extends Controller
      * @param Shop $shop
      * @return void
      */
-    public function show(Shop $shop)
+    public function show(Request $request, Shop $shop)
     {
+        //ショップ詳細情報
         $shop = Shop::with(['area', 'genre', 'reviews'])->where('id', $shop->id)->get();
 
         if ($shop) {
