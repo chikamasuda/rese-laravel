@@ -42,8 +42,6 @@ class ReservationController extends Controller
             "number"  =>  $request->number,
         ]);
 
-        Log::info($reservations);
-
         return response()->json(['reservations' => $reservations], 201);
     }
 

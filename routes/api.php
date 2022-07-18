@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,5 +68,11 @@ Route::group(['middleware' => 'auth:api',], function () {
         Route::get('/v1/users/{user}/reservations', 'index');
         //予約追加
         Route::post('/v1/reservations/', 'store');
+    });
+
+    //評価
+    Route::controller(ReviewController::class)->group(function () {
+        //レビュー追加
+        Route::post('/v1/reviews/', 'store');
     });
 });

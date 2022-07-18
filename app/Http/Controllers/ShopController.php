@@ -30,7 +30,7 @@ class ShopController extends Controller
      */
     public function show(Shop $shop)
     {
-        $shop = Shop::with(['area', 'genre'])->where('id', $shop->id)->get();
+        $shop = Shop::with(['area', 'genre', 'reviews'])->where('id', $shop->id)->get();
 
         if ($shop) {
             return response()->json(['shop' => $shop], 200);

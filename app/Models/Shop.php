@@ -38,4 +38,14 @@ class Shop extends Model
     {
         return $this->hasMany(Favorite::class);
     }
+
+    /**
+     * favoritesテーブルとのリレーション 
+     *
+     * @return void
+     */
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }

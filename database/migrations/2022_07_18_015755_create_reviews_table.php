@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('shop_id')->constrained('shops')->onDelete('cascade');
-            $table->unsignedDecimal('rating', 8, 2);
+            $table->unsignedDecimal('rating', 2, 1);
             $table->text('comment')->comment('評価コメント');
             $table->timestamps();
         });
