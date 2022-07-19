@@ -8,6 +8,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\VerifyEmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,11 @@ use App\Http\Controllers\ReviewController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+//メール認証
+Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
+    ->middleware(['signed', 'throttle:6,1'])
+    ->name('verification.verify');
 
 //ログイン、新規登録
 Route::controller(AuthController::class)->group(function () {
@@ -36,7 +42,7 @@ Route::controller(ShopController::class)->group(function () {
     Route::get('/v1/shops/{shop}', 'show');
 });
 
-Route::group(['middleware' => 'auth:api'], function () {
+Route::group(['middleware' => 'auth:api', 'verified'], function () {
 
     //認証
     Route::controller(AuthController::class)->group(function () {
@@ -74,7 +80,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::controller(ReviewController::class)->group(function () {
         //レビュー追加
         Route::post('/v1/reviews/', 'store');
-        //来店済かチェック
+        //来店したか確認
         Route::get('/v1/is-arrived/', 'is_arrived');
     });
 });
