@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class FavoritesTableSeeder extends Seeder
+class AdminsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,25 +15,20 @@ class FavoritesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('favorites')->insert([
+        DB::table('admins')->insert([
             [
                 'id' => '1',
-                'user_id' => '1',
-                'shop_id' => '1',
+                'name' => '管理者１',
+                'email' => 'admin1@gmail.com',
+                'password' => bcrypt('admin1234'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'id' => '2',
-                'user_id' => '1',
-                'shop_id' => '3',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s'),
-            ],
-            [
-                'id' => '3',
-                'user_id' => '2',
-                'shop_id' => '5',
+                'name' => '管理者２',
+                'email' => 'admin2@gmail.com',
+                'password' => bcrypt('admin1234'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],

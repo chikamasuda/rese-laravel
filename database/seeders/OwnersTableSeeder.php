@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ReservationsTableSeeder extends Seeder
+class OwnersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,51 +15,44 @@ class ReservationsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('reservations')->insert([
+        DB::table('owners')->insert([
             [
                 'id' => '1',
-                'user_id' => '1',
-                'shop_id' => '10',
-                'date' => '2022-07-04 12:00:00',
-                'number' => '2',
+                'name' => 'オーナー１',
+                'email' => 'owner1@gmail.com',
+                'password' => bcrypt('owner1234'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'id' => '2',
-                'user_id' => '2',
-                'shop_id' => '13',
-                'date' => '2022-07-04 12:00:00',
-                'number' => '2',
+                'name' => 'オーナー２',
+                'email' => 'owner2@gmail.com',
+                'password' => bcrypt('owner1234'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'id' => '3',
-                'user_id' => '1',
-                'shop_id' => '1',
-                'date' => '2022-08-04 9:00:00',
-                'number' => '1',
+                'name' => 'オーナー３',
+                'email' => 'owner3@gmail.com',
+                'password' => bcrypt('owner1234'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
-
             [
                 'id' => '4',
-                'user_id' => '1',
-                'shop_id' => '1',
-                'date' => '2022-07-04 9:00:00',
-                'number' => '1',
+                'name' => 'オーナー４',
+                'email' =>  bcrypt('owner1234'),
+                'password' => 'owner1234',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
-
             [
                 'id' => '5',
-                'user_id' => '1',
-                'shop_id' => '10',
-                'date' => '2022-07-04 9:00:00',
-                'number' => '1',
+                'name' => 'オーナー５',
+                'email' =>  bcrypt('owner1234'),
+                'password' => 'owner1234',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],

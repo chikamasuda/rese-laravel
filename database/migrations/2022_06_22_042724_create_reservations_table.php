@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');;
             $table->foreignId('shop_id')->constrained('shops')->onDelete('cascade');;
-            $table->dateTime('date');
-            $table->integer('number');
+            $table->dateTime('date')->comment('予約日時');
+            $table->integer('number')->comment('予約人数');
             $table->timestamps();
         });
     }

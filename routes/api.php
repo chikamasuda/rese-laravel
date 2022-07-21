@@ -4,6 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\OwnerController;
+use App\Http\Controllers\Owner\OwnerAuthController;
+use App\Http\Controllers\Owner\ReservationController as OwnerReservationController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReservationController;
@@ -21,15 +25,25 @@ use App\Http\Controllers\VerifyEmailController;
 |
 */
 
-//メール認証
+//ユーザーログイン、新規登録
+Route::controller(AuthController::class)->group(function () {
+    Route::post('/v1/users/login', 'login');
+    Route::post('/v1/users/registration', 'register');
+});
+
+//ユーザーのメール認証
 Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
     ->middleware(['signed', 'throttle:6,1'])
     ->name('verification.verify');
 
-//ログイン、新規登録
-Route::controller(AuthController::class)->group(function () {
-    Route::post('/v1/users/login', 'login');
-    Route::post('/v1/users/registration', 'register');
+//管理者ログイン
+Route::controller(AdminAuthController::class)->group(function () {
+    Route::post('/v1/admins/login', 'login');
+});
+
+//代表者ログイン
+Route::controller(OwnerAuthController::class)->group(function () {
+    Route::post('/v1/owners/login', 'login');
 });
 
 //飲食店情報
@@ -42,9 +56,10 @@ Route::controller(ShopController::class)->group(function () {
     Route::get('/v1/shops/{shop}', 'show');
 });
 
-Route::group(['middleware' => 'auth:api', 'verified'], function () {
+//ユーザー機能（ログイン後）
+Route::group(['middleware' => 'auth:user', 'verified'], function () {
 
-    //認証
+    //ユーザー認証
     Route::controller(AuthController::class)->group(function () {
         //認証が成功した場合は、ユーザー情報を返す
         Route::get('/v1/users', 'me');
@@ -82,5 +97,40 @@ Route::group(['middleware' => 'auth:api', 'verified'], function () {
         Route::post('/v1/reviews/', 'store');
         //来店したか確認
         Route::get('/v1/is-arrived/', 'is_arrived');
+    });
+});
+
+//管理者機能（ログイン後）
+Route::group(['middleware' => 'auth:admin'], function () {
+
+    //管理者認証
+    Route::controller(AdminAuthController::class)->group(function () {
+        //認証が成功した場合は、ユーザー情報を返す
+        Route::get('/v1/admins', 'me');
+        //ログアウト
+        Route::delete('/v1/admins/logout', 'logout');
+    });
+
+    //店舗代表者に関する機能
+    Route::controller(OwnerController::class)->group(function () {
+        //店舗代表者作成
+        Route::post('/v1/owners', 'store');
+    });
+});
+
+//オーナー機能（ログイン後）
+Route::group(['middleware' => 'auth:owner'], function () {
+
+    //オーナー認証
+    Route::controller(OwnerAuthController::class)->group(function () {
+        //認証が成功した場合は、ユーザー情報を返す
+        Route::get('/v1/owners', 'me');
+        //ログアウト
+        Route::delete('/v1/owners/logout', 'logout');
+    });
+
+    Route::controller(OwnerReservationController::class)->group(function () {
+        //認証が成功した場合は、ユーザー情報を返す
+        Route::get('/v1/owners/owner/reservations', 'index');
     });
 });
