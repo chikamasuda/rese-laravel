@@ -25,4 +25,14 @@ class Reservation extends Model
     {
         return $this->belongsTo(Shop::class, 'shop_id');
     }
+
+    /**
+     * usersテーブルとのリレーション 
+     *
+     * @return void
+     */
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

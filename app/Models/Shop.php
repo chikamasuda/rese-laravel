@@ -49,6 +49,11 @@ class Shop extends Model
         return $this->hasMany(Review::class);
     }
 
+    /**
+     * reservationsテーブルとのリレーション
+     *
+     * @return void
+     */
     public function reservations()
     {
         return $this->hasMany(Reservation::class);

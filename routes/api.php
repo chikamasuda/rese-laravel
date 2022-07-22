@@ -131,6 +131,6 @@ Route::group(['middleware' => 'auth:owner'], function () {
 
     Route::controller(OwnerReservationController::class)->group(function () {
         //認証が成功した場合は、ユーザー情報を返す
-        Route::get('/v1/owners/owner/reservations', 'index');
+        Route::get('/v1/owners/{owner}/reservations', 'index');
     });
 });
