@@ -51,7 +51,7 @@ class OwnersTableSeeder extends Seeder
             [
                 'id' => '5',
                 'name' => 'オーナー５',
-                'email' => 'owner4@gmail.com',
+                'email' => 'owner5@gmail.com',
                 'password' => bcrypt('owner1234'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
