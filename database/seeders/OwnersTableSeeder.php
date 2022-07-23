@@ -67,7 +67,7 @@ class OwnersTableSeeder extends Seeder
             [
                 'id' => '7',
                 'name' => 'オーナー7',
-                'email' => 'owner5@gmail.com',
+                'email' => 'owner7@gmail.com',
                 'password' => bcrypt('owner1234'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
@@ -75,7 +75,7 @@ class OwnersTableSeeder extends Seeder
             [
                 'id' => '8',
                 'name' => 'オーナー8',
-                'email' => 'owner5@gmail.com',
+                'email' => 'owner8@gmail.com',
                 'password' => bcrypt('owner1234'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
@@ -83,7 +83,7 @@ class OwnersTableSeeder extends Seeder
             [
                 'id' => '9',
                 'name' => 'オーナー9',
-                'email' => 'owner5@gmail.com',
+                'email' => 'owner9@gmail.com',
                 'password' => bcrypt('owner1234'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
@@ -91,7 +91,7 @@ class OwnersTableSeeder extends Seeder
             [
                 'id' => '10',
                 'name' => 'オーナー10',
-                'email' => 'owner5@gmail.com',
+                'email' => 'owner10@gmail.com',
                 'password' => bcrypt('owner1234'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
@@ -99,7 +99,7 @@ class OwnersTableSeeder extends Seeder
             [
                 'id' => '11',
                 'name' => 'オーナー11',
-                'email' => 'owner5@gmail.com',
+                'email' => 'owner11@gmail.com',
                 'password' => bcrypt('owner1234'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
@@ -107,7 +107,7 @@ class OwnersTableSeeder extends Seeder
             [
                 'id' => '12',
                 'name' => 'オーナー12',
-                'email' => 'owner5@gmail.com',
+                'email' => 'owner12@gmail.com',
                 'password' => bcrypt('owner1234'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
@@ -115,7 +115,7 @@ class OwnersTableSeeder extends Seeder
             [
                 'id' => '13',
                 'name' => 'オーナー13',
-                'email' => 'owner5@gmail.com',
+                'email' => 'owner13@gmail.com',
                 'password' => bcrypt('owner1234'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
@@ -123,7 +123,7 @@ class OwnersTableSeeder extends Seeder
             [
                 'id' => '14',
                 'name' => 'オーナー14',
-                'email' => 'owner5@gmail.com',
+                'email' => 'owner14@gmail.com',
                 'password' => bcrypt('owner1234'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
@@ -131,7 +131,7 @@ class OwnersTableSeeder extends Seeder
             [
                 'id' => '15',
                 'name' => 'オーナー1５',
-                'email' => 'owner5@gmail.com',
+                'email' => 'owner15@gmail.com',
                 'password' => bcrypt('owner1234'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
@@ -139,7 +139,7 @@ class OwnersTableSeeder extends Seeder
             [
                 'id' => '16',
                 'name' => 'オーナー16',
-                'email' => 'owner5@gmail.com',
+                'email' => 'owner16@gmail.com',
                 'password' => bcrypt('owner1234'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
@@ -147,7 +147,7 @@ class OwnersTableSeeder extends Seeder
             [
                 'id' => '17',
                 'name' => 'オーナー17',
-                'email' => 'owner5@gmail.com',
+                'email' => 'owner17@gmail.com',
                 'password' => bcrypt('owner1234'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
@@ -155,7 +155,7 @@ class OwnersTableSeeder extends Seeder
             [
                 'id' => '18',
                 'name' => 'オーナー18',
-                'email' => 'owner5@gmail.com',
+                'email' => 'owner18@gmail.com',
                 'password' => bcrypt('owner1234'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
@@ -163,7 +163,7 @@ class OwnersTableSeeder extends Seeder
             [
                 'id' => '19',
                 'name' => 'オーナー19',
-                'email' => 'owner5@gmail.com',
+                'email' => 'owner19@gmail.com',
                 'password' => bcrypt('owner1234'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
@@ -171,7 +171,7 @@ class OwnersTableSeeder extends Seeder
             [
                 'id' => '20',
                 'name' => 'オーナー20',
-                'email' => 'owner5@gmail.com',
+                'email' => 'owner20@gmail.com',
                 'password' => bcrypt('owner1234'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
