@@ -19,7 +19,7 @@ class OwnerController extends Controller
         $owners = Owner::create([
             "name"     =>  $request->name,
             "email"    =>  $request->email,
-            "password" =>  $request->password,
+            "password" =>  bcrypt($request->password),
         ]);
 
         return response()->json(['owners' => $owners], 201);

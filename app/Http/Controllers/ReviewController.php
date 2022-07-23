@@ -30,14 +30,14 @@ class ReviewController extends Controller
     }
 
     /**
-     * 評価可能か確認
+     * 来店済の予約の数と評価済の店舗の数の確認
      *
      * @param Request $request
      * @return void
      */
     public function is_arrived(Request $request)
     {
-        //来店すみの予約の数の確認
+        //来店済の予約の数の確認
         $reservation = Reservation::where('user_id', $request->user_id)
             ->where('date', '<=', Carbon::now())
             ->where('shop_id', $request->shop_id)
@@ -45,7 +45,7 @@ class ReviewController extends Controller
 
         $reservation_count = count($reservation);
 
-        //評価済みの店舗の数の確認
+        //評価済の店舗の数の確認
         $reviews = Review::where('user_id', $request->user_id)
             ->where('shop_id', $request->shop_id)
             ->get();
