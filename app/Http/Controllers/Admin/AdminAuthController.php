@@ -29,7 +29,7 @@ class AdminAuthController extends Controller
         //トークン発行
         $token = $admin->createToken('authToken')->accessToken;
 
-        return response()->json(['token' => $token], 200);
+        return response()->json(['admin' => $admin, 'token' => $token], 200);
     }
 
     /**
