@@ -49,8 +49,12 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         //ログインチェック
-        if (!$user || !Hash::check($request->password, $user->password) || empty($user->email_verified_at)) {
-            return response()->json(['message' => 'Login failed.'], 401);
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return response()->json(['message' => 'メールアドレスまたはパスワードに誤りがあります。'], 401);
+        }
+
+        if (empty($user->email_verified_at)) {
+            return response()->json(['message' => 'メール認証がされていません。'], 401);
         }
 
         //トークン発行
