@@ -10,27 +10,26 @@ use Illuminate\Support\Facades\Hash;
 
 class OwnerAuthController extends Controller
 {
-
     /**
      * ログイン
      *
-     * @param Request $request
-     * @return void
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
     public function login(Request $request)
     {
-        //管理者情報取得
-        $owner = Owner::where('email', $request->email)->first();
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-        //ログインチェック
-        if (!$owner || !Hash::check($request->password, $owner->password)) {
-            return response()->json(['message' => 'Login failed.'], 401);
+        if (Auth::guard('owner')->attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return response()->json(Auth::guard('owner')->user());
         }
 
-        //トークン発行
-        $token = $owner->createToken('authToken')->accessToken;
-
-        return response()->json(['token' => $token], 200);
+        return response()->json(['message' => 'ログインに失敗しました'], 401);
     }
 
     /**
@@ -39,12 +38,15 @@ class OwnerAuthController extends Controller
      * @param Request $request
      * @return void
      */
-    public function logout()
+    public function logout(Request $request)
     {
-        $accessToken = Auth::guard('owner')->user()->token();
-        $token = Auth::guard('owner')->user()->tokens->find($accessToken);
-        $token->revoke();
-        return response()->json(['message' => 'Logged out.'], 200);
+        Auth::guard('owner')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return response()->json(['message' => 'ログアウトしました']);
     }
 
     /**
