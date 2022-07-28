@@ -73,6 +73,7 @@ class AuthController extends Controller
     {
         $accessToken = auth()->user()->token();
         $token = $request->user()->tokens->find($accessToken);
+        //トークン無効化
         $token->revoke();
         return response()->json(['message' => 'Logged out.'], 200);
     }

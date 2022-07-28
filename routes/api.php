@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\OwnerController;
+use App\Http\Controllers\Admin\MailController;
 use App\Http\Controllers\Owner\OwnerAuthController;
 use App\Http\Controllers\Owner\ReservationController as OwnerReservationController;
 use App\Http\Controllers\ShopController;
@@ -24,6 +25,10 @@ use App\Http\Controllers\VerifyEmailController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+/**
+ * ログイン前
+ */
 
 //ユーザーログイン、新規登録
 Route::controller(AuthController::class)->group(function () {
@@ -55,6 +60,10 @@ Route::controller(ShopController::class)->group(function () {
     //飲食店詳細
     Route::get('/v1/shops/{shop}', 'show');
 });
+
+/**
+ * ログイン後
+ */
 
 //ユーザー機能（ログイン後）
 Route::group(['middleware' => 'auth:user', 'verified'], function () {
@@ -115,6 +124,18 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::controller(OwnerController::class)->group(function () {
         //店舗代表者作成
         Route::post('/v1/owners', 'store');
+    });
+
+    //ユーザーへのメール送信に関する機能
+    Route::controller(MailController::class)->group(function () {
+        //ユーザー一覧取得
+        Route::get('/v1/admins/mails/user-list', 'getUserList');
+        //ユーザー詳細取得
+        Route::get('/v1/admins/mails/user-detail', 'getUserDetail');
+        //ユーザーへのメール送信
+        Route::post('/v1/admins/mails/send', 'sendUserMail');
+        //リマインドメール送信
+        Route::post('/v1/admins/mails/remind', 'sendRemindMail');
     });
 });
 

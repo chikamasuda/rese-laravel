@@ -41,4 +41,14 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * usersテーブルとのリレーション 
+     *
+     * @return void
+     */
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }
