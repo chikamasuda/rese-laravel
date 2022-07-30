@@ -16,6 +16,10 @@ class Reservation extends Model
         'number',
     ];
 
+    protected $dates = [
+        'date'
+    ];
+
     /**
      * shopsテーブルとのリレーション 
      *

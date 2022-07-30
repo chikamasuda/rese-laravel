@@ -37,7 +37,7 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 //ユーザーのメール認証
-Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
+Route::get('v1/email/verify/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
     ->middleware(['signed', 'throttle:6,1'])
     ->name('verification.verify');
 
@@ -105,7 +105,7 @@ Route::group(['middleware' => 'auth:user', 'verified'], function () {
         //レビュー追加
         Route::post('/v1/reviews/', 'store');
         //来店したか確認
-        Route::get('/v1/is-arrived/', 'is_arrived');
+        Route::get('/v1/is-arrived/', 'is_arrived'); //reviewsとつける
     });
 });
 
@@ -134,8 +134,6 @@ Route::group(['middleware' => 'auth:admin'], function () {
         Route::get('/v1/admins/mails/user-detail', 'getUserDetail');
         //ユーザーへのメール送信
         Route::post('/v1/admins/mails/send', 'sendUserMail');
-        //リマインドメール送信
-        Route::post('/v1/admins/mails/remind', 'sendRemindMail');
     });
 });
 

@@ -16,12 +16,9 @@ class RemaindMail extends Mailable
      *
      * @return void
      */
-    public function __construct($date, $users, $shops, $number)
+    public function __construct($reservation)
     {
-        $this->date = $date;
-        $this->number = $number;
-        $this->users = $users;
-        $this->shops = $shops;
+        $this->reservation = $reservation;
     }
 
     /**
@@ -34,10 +31,7 @@ class RemaindMail extends Mailable
         return $this->subject('予約当日のご確認')
             ->view('mail.remind')
             ->with([
-                'users' => $this->users,
-                'shops' => $this->shops,
-                'date' => $this->date,
-                'number' => $this->number,
+                'reservation' => $this->reservation,
             ]);
     }
 }

@@ -32,24 +32,12 @@ class RemindMail extends Command
      */
     public function handle()
     {
-        $users = User::with('reservations')
-            ->whereHas('reservations',  function ($query) {
-                $query->whereDate('date', date('Y-m-d'));
-            })->pluck('name');
+        //当日の予約情報を取得
+        $reservations = Reservation::whereDate('date', date('Y-m-d'))->get();
 
-        $email = User::with('reservations')
-            ->whereHas('reservations',  function ($query) {
-                $query->whereDate('date', date('Y-m-d'));
-            })->pluck('email');
-
-        $shops = Shop::with('reservations')
-            ->whereHas('reservations',  function ($query) {
-                $query->whereDate('date', date('Y-m-d'));
-            })->pluck('name');
-
-        $date = Reservation::whereDate('date', date('Y-m-d'))->pluck('date');
-        $number = Reservation::whereDate('date', date('Y-m-d'))->pluck('number');
-
-        Mail::to($email)->send(new RemaindMail($date, $number, $users, $shops));
+        //メール送信
+        foreach ($reservations as $reservation) {
+            Mail::to($reservation->users->email)->send(new RemaindMail($reservation));
+        }
     }
 }
