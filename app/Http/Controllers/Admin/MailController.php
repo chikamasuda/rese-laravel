@@ -59,4 +59,22 @@ class MailController extends Controller
 
     return response()->json(['message' => 'Email was successfully sent'], 200);
   }
+
+  /**
+   * 予約リマインドメール送信
+   *
+   * @return void
+   */
+  public static function sendRemindMail()
+  {
+    //当日の予約情報を取得
+    $reservations = Reservation::whereDate('date', date('Y-m-d'))->get();
+
+    //メール送信
+    foreach ($reservations as $reservation) {
+      Mail::to($reservation->users->email)->send(new RemaindMail($reservation));
+    }
+
+    return response()->json(['message' => 'Email was successfully sent'], 200);
+  }
 }

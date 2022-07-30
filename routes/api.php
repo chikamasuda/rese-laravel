@@ -134,6 +134,8 @@ Route::group(['middleware' => 'auth:admin'], function () {
         Route::get('/v1/admins/mails/user-detail', 'getUserDetail');
         //ユーザーへのメール送信
         Route::post('/v1/admins/mails/send', 'sendUserMail');
+        //リマインドメール送信
+        Route::post('/v1/admins/mails/remind', 'sendRemindMail');
     });
 });
 

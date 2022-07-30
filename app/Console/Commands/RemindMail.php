@@ -3,11 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Mail\RemaindMail;
-use App\Models\User;
-use App\Models\Shop;
-use App\Models\Reservation;
-use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\Admin\MailController;
 
 class RemindMail extends Command
 {
@@ -32,12 +28,6 @@ class RemindMail extends Command
      */
     public function handle()
     {
-        //当日の予約情報を取得
-        $reservations = Reservation::whereDate('date', date('Y-m-d'))->get();
-
-        //メール送信
-        foreach ($reservations as $reservation) {
-            Mail::to($reservation->users->email)->send(new RemaindMail($reservation));
-        }
+        MailController::sendRemindMail();
     }
 }
