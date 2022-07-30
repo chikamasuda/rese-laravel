@@ -53,7 +53,7 @@ class ReservationController extends Controller
      */
     public function show(Reservation $reservation)
     {
-        $reservation = Reservation::with('shops')->where('id', $reservation->id)->get();
+        $reservation = Reservation::with(['shops', 'users'])->where('id', $reservation->id)->get();
 
         if ($reservation) {
             return response()->json(['reservation' => $reservation], 200);
