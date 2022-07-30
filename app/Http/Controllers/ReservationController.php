@@ -21,7 +21,7 @@ class ReservationController extends Controller
     {
         $reservations = Reservation::with('shops')
             ->where('user_id', $user->id)
-            ->where('date', '>=', Carbon::now())
+            ->where('date', '>=', date('Y-m-d'))
             ->get();
 
         return response()->json(['reservations' => $reservations], 200);
