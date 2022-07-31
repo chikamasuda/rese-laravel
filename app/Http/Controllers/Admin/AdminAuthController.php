@@ -24,8 +24,8 @@ class AdminAuthController extends Controller
         ]);
 
         if (Auth::guard('admin')->attempt($credentials)) {
-            $session = $request->session()->regenerate();
-            session()->put('rese.session', $session);
+            $request->session()->regenerate();
+            $request->session()->regenerateToken();
 
             return response()->json(Auth::guard('admin')->user());
         }
