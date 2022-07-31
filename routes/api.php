@@ -41,6 +41,12 @@ Route::get('v1/email/verify/{id}/{hash}', [VerifyEmailController::class, '__invo
     ->middleware(['signed', 'throttle:6,1'])
     ->name('verification.verify');
 
+//予約確認
+Route::controller(ReservationController::class)->group(function () {
+    //予約詳細
+    Route::get('/v1/reservations/{reservation}', 'show');
+});
+
 //管理者ログイン
 Route::controller(AdminAuthController::class)->group(function () {
     Route::post('/v1/admins/login', 'login');
