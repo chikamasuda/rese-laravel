@@ -135,7 +135,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
         //ユーザー一覧取得
         Route::get('/v1/admins/mails/user-list', 'getUserList');
         //ユーザー詳細取得
-        Route::get('/v1/admins/mails/user-detail', 'getUserDetail');
+        Route::get('/v1/admins/mails/user/{user}', 'getUserDetail');
         //ユーザーへのメール送信
         Route::post('/v1/admins/mails/send', 'sendUserMail');
         //リマインドメール送信
