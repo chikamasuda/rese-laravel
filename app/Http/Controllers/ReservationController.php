@@ -19,7 +19,7 @@ class ReservationController extends Controller
      */
     public function index(User $user)
     {
-        $reservations = Reservation::with('shops')
+        $reservations = Reservation::with(['shops', 'users'])
             ->where('user_id', $user->id)
             ->where('date', '>=', date('Y-m-d'))
             ->get();

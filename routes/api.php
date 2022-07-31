@@ -41,11 +41,6 @@ Route::get('v1/email/verify/{id}/{hash}', [VerifyEmailController::class, '__invo
     ->middleware(['signed', 'throttle:6,1'])
     ->name('verification.verify');
 
-//予約内容詳細
-Route::controller(ReservationController::class)->group(function () {
-    Route::get('/v1/reservations/{reservation}', 'show');
-});
-
 //管理者ログイン
 Route::controller(AdminAuthController::class)->group(function () {
     Route::post('/v1/admins/login', 'login');
@@ -95,6 +90,8 @@ Route::group(['middleware' => 'auth:user', 'verified'], function () {
     Route::controller(ReservationController::class)->group(function () {
         //予約変更
         Route::put('/v1/reservations/{reservation}', 'update');
+        //予約詳細
+        Route::get('/v1/reservations/{reservation}', 'show');
         //予約削除
         Route::delete('/v1/reservations/{reservation}', 'destroy');
         //予約一覧
