@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -13,23 +14,23 @@ class AdminAuthController extends Controller
     /**
      * ログイン
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return void
      */
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        //ユーザー情報取得
+        $user = Admin::where('email', $request->email)->first();
 
-        if (Auth::guard('admin')->attempt($credentials)) {
-            $request->session()->regenerate();
-
-            return response()->json(Auth::guard('admin')->user());
+        //ログインチェック
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return response()->json(['message' => 'メールアドレスまたはパスワードに誤りがあります。'], 401);
         }
 
-        return response()->json(['message' => 'ログインに失敗しました'], 401);
+        //トークン発行
+        $token = $user->createToken('authToken')->accessToken;
+
+        return response()->json(['token' => $token], 200);
     }
 
     /**
@@ -40,13 +41,11 @@ class AdminAuthController extends Controller
      */
     public function logout(Request $request)
     {
-        Auth::guard('admin')->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return response()->json(['message' => 'ログアウトしました']);
+        $accessToken =  Auth::guard('admin')->user()->token();
+        $token = Auth::guard('admin')->user()->tokens->find($accessToken);
+        //トークン無効化
+        $token->revoke();
+        return response()->json(['message' => 'Logged out.'], 200);
     }
 
     /**

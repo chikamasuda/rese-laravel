@@ -121,7 +121,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
         //認証が成功した場合は、ユーザー情報を返す
         Route::get('/v1/admins', 'me');
         //ログアウト
-        Route::post('/v1/admins/logout', 'logout');
+        Route::delete('/v1/admins/logout', 'logout');
     });
 
     //店舗代表者に関する機能

@@ -47,12 +47,12 @@ return [
         ],
 
         'admin' => [
-            'driver' => 'session',
+            'driver' => 'passport',
             'provider' => 'admins',
         ],
 
         'owner' => [
-            'driver' => 'session',
+            'driver' => 'passport',
             'provider' => 'owners',
         ],
     ],
