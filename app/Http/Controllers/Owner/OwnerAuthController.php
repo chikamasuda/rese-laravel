@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Owner;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
 use App\Models\Owner;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -13,23 +14,23 @@ class OwnerAuthController extends Controller
     /**
      * ログイン
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return void
      */
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        //ユーザー情報取得
+        $user = Owner::where('email', $request->email)->first();
 
-        if (Auth::guard('owner')->attempt($credentials)) {
-            $request->session()->regenerate();
-
-            return response()->json(Auth::guard('owner')->user());
+        //ログインチェック
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return response()->json(['message' => 'メールアドレスまたはパスワードに誤りがあります。'], 401);
         }
 
-        return response()->json(['message' => 'ログインに失敗しました'], 401);
+        //トークン発行
+        $token = $user->createToken('authToken')->accessToken;
+
+        return response()->json(['token' => $token], 200);
     }
 
     /**
@@ -40,15 +41,12 @@ class OwnerAuthController extends Controller
      */
     public function logout(Request $request)
     {
-        Auth::guard('owner')->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return response()->json(['message' => 'ログアウトしました']);
+        $accessToken =  Auth::guard('owner')->user()->token();
+        $token = Auth::guard('owner')->user()->tokens->find($accessToken);
+        //トークン無効化
+        $token->revoke();
+        return response()->json(['message' => 'Logged out.'], 200);
     }
-
     /**
      * 管理者情報を返す
      *

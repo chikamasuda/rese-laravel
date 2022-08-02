@@ -32,9 +32,9 @@ class AuthController extends Controller
         event(new Registered($user = User::create($validated_data)));
 
         //トークン発行
-        $token = $user->createToken('authToken')->accessToken;
+        $user_token = $user->createToken('authToken')->accessToken;
 
-        return response()->json(['user' => $user, 'token' => $token], 201);
+        return response()->json(['user' => $user, 'user_token' => $user_token], 201);
     }
 
     /**
@@ -51,10 +51,6 @@ class AuthController extends Controller
         //ログインチェック
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json(['message' => 'メールアドレスまたはパスワードに誤りがあります。'], 401);
-        }
-
-        if (empty($user->email_verified_at)) {
-            return response()->json(['message' => 'メール認証がされていません。'], 401);
         }
 
         //トークン発行

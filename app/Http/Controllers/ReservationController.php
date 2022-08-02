@@ -22,6 +22,7 @@ class ReservationController extends Controller
         $reservations = Reservation::with(['shops', 'users'])
             ->where('user_id', $user->id)
             ->where('date', '>=', date('Y-m-d'))
+            ->orderBy('date')
             ->get();
 
         return response()->json(['reservations' => $reservations], 200);

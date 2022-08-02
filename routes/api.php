@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\OwnerController;
 use App\Http\Controllers\Admin\MailController;
 use App\Http\Controllers\Owner\OwnerAuthController;
 use App\Http\Controllers\Owner\ReservationController as OwnerReservationController;
+use App\Http\Controllers\Owner\ShopController as OwnerShopController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReservationController;
@@ -115,7 +116,6 @@ Route::group(['middleware' => 'auth:user', 'verified'], function () {
 
 //管理者機能（ログイン後）
 Route::group(['middleware' => 'auth:admin'], function () {
-
     //管理者認証
     Route::controller(AdminAuthController::class)->group(function () {
         //認証が成功した場合は、ユーザー情報を返す
@@ -151,11 +151,14 @@ Route::group(['middleware' => 'auth:owner'], function () {
         //認証が成功した場合は、ユーザー情報を返す
         Route::get('/v1/owners', 'me');
         //ログアウト
-        Route::post('/v1/owners/logout', 'logout');
+        Route::delete('/v1/owners/logout', 'logout');
     });
 
     Route::controller(OwnerReservationController::class)->group(function () {
-        //認証が成功した場合は、ユーザー情報を返す
         Route::get('/v1/owners/{owner}/reservations', 'index');
+    });
+
+    Route::controller(OwnerShopController::class)->group(function () {
+        Route::get('/v1/owners/{owner}/shops', 'index');
     });
 });
