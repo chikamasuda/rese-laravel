@@ -65,7 +65,7 @@ class ShopController extends Controller
     Log::info($request->all());
     $genre_id = Genre::where('name', $request->genre)->pluck('id');
 
-    if ($request->file('image') && $area_id[0] && $genre_id[0]) {
+    if ($request->file('image')) {
       $disk = Storage::disk('s3');
       $image_name = $request->file('image')->getClientOriginalName();
       //s3にアップして保存
@@ -90,7 +90,7 @@ class ShopController extends Controller
       ];
     }
 
-    $shop = Shop::where('owner_id', $shop->id)->update($update);
+    $shop = Shop::where('id', $shop->id)->update($update);
 
     if ($shop) {
       return response()->json(['message' => 'Updated successfully'], 200);
