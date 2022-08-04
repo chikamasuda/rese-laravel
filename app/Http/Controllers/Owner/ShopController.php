@@ -61,11 +61,9 @@ class ShopController extends Controller
    */
   public function update(Request $request, Shop $shop)
   {
-    $area = Area::where('name', $request->area)->pluck('id');
-    $area_id = $area[0];
+    $area_id = Area::where('name', $request->area)->pluck('id');
     Log::info($request->all());
-    $genre = Genre::where('name', $request->genre)->pluck('id');
-    $genre_id = $genre[0];
+    $genre_id = Genre::where('name', $request->genre)->pluck('id');
 
     if ($request->file('image') && $area_id[0] && $genre_id[0]) {
       $disk = Storage::disk('s3');
@@ -76,8 +74,8 @@ class ShopController extends Controller
 
       $update = [
         "owner_id"    =>  $request->owner_id,
-        "area_id"     =>  $area_id,
-        "genre_id"    =>  $genre_id,
+        "area_id"     =>  $area_id[0],
+        "genre_id"    =>  $genre_id[0],
         "name"        =>  $request->name,
         "image_url"   =>  $disk->url($path) . $image_name,
         "description" =>  $request->description,
@@ -85,8 +83,8 @@ class ShopController extends Controller
     } else {
       $update = [
         "owner_id"    =>  $request->owner_id,
-        "area_id"     =>  $area_id,
-        "genre_id"    =>  $genre_id,
+        "area_id"     =>  $area_id[0],
+        "genre_id"    =>  $genre_id[0],
         "name"        =>  $request->name,
         "description" =>  $request->description,
       ];

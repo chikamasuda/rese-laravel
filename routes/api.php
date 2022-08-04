@@ -166,6 +166,6 @@ Route::group(['middleware' => 'auth:owner'], function () {
         //飲食店情報作成
         Route::post('/v1/shops/', 'store');
         //飲食店情報更新
-        Route::put('/v1/shops/{shop}', 'update');
+        Route::post('/v1/shops/{shop}', 'update');
     });
 });
