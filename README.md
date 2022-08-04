@@ -43,7 +43,7 @@ docker run --rm \
 
 ⑤Dockerのコンテナ起動
 ```
-./vendor/bin/sail up
+./vendor/bin/sail up -d
 ```
 
 ⑦APP_KEYを更新
