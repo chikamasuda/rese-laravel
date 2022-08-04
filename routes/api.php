@@ -154,11 +154,18 @@ Route::group(['middleware' => 'auth:owner'], function () {
         Route::delete('/v1/owners/logout', 'logout');
     });
 
+    //予約情報
     Route::controller(OwnerReservationController::class)->group(function () {
         Route::get('/v1/owners/{owner}/reservations', 'index');
     });
 
+    //飲食店情報
     Route::controller(OwnerShopController::class)->group(function () {
+        //オーナー所属の飲食店情報を取得
         Route::get('/v1/owners/{owner}/shops', 'index');
+        //飲食店情報作成
+        Route::post('/v1/shops/', 'store');
+        //飲食店情報更新
+        Route::put('/v1/shops/{shop}', 'update');
     });
 });

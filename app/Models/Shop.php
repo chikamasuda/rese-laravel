@@ -10,6 +10,20 @@ class Shop extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'owner_id',
+        'area_id',
+        'genre_id',
+        'name',
+        'description',
+        'image_url'
+    ];
+
+    /**
      * areasテーブルとのリレーション 
      *
      * @return void
