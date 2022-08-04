@@ -26,9 +26,10 @@ git clone https://github.com/chikamasuda/rese-laravel.git
 ```
 cp .env.example .env
 ```
-④.envファイルのDB_HOSTをmysqlに変更する  
+④.envファイルのDB_HOSTをmysqlに変更、DB_USERNAMEをrootに変更、DB_PASSWORDをpasswordに変更する  
 
 <img width="792" alt="スクリーンショット 2022-08-04 23 12 40" src="https://user-images.githubusercontent.com/66733811/182868852-4d1bddf0-546f-47d1-b76f-b2487681e2e5.png">
+<img width="700" alt="スクリーンショット 2022-08-04 23 26 25" src="https://user-images.githubusercontent.com/66733811/182871964-85b79483-bf0b-44b1-a798-5eda13f6e650.png">
 
 
 ④Composer依存関係のインストール　　
