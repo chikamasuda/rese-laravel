@@ -54,9 +54,9 @@ docker run --rm \
 
 ⑧http://localhost で初期画面がみれる。  
 
-⑨マイグレーションとシーダーのデータをセット  
+⑨マイグレーションを行う。
 ```
-./vendor/bin/sail artisan migrate --seed
+./vendor/bin/sail artisan migrate
 ```
 
 
