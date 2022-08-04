@@ -1,4 +1,5 @@
-# 概要
+# Rese
+## 概要
 WebアプリケーションReseのバックエンドリポジトリ。  
 Webアプリ概要については、以下のReseのフロントエンドリポジトリに記載。  
 
@@ -6,14 +7,14 @@ Webアプリ概要については、以下のReseのフロントエンドリポ�
 https://github.com/chikamasuda/rese-nuxt
 
 
-# 環境構築方法(Docker)
+## 環境構築方法(Docker)
 
-## 前提条件　　
+### 前提条件　　
 ・Laravel sailを用いて環境構築している。  
 ・Docker Desktopのデスクトップアプリをインストールし、Dockerの状態が「Docker Desktop is running」であること。  
 
 
-## 環境構築
+### 環境構築
 ①git cloneする
 ```
 git clone https://github.com/chikamasuda/rese-laravel.git
@@ -26,11 +27,6 @@ git clone https://github.com/chikamasuda/rese-laravel.git
 cp .env.example .env
 ```
 
-※Docker起動時にM1Macだとエラーが出るため、M1Mac使用時は以下でrosettaのバージョンアップをする。
-```
-/usr/sbin/softwareupdate --install-rosetta --agree-to-license
-```
-
 ④Composer依存関係のインストール　　
 ```
 docker run --rm \
@@ -40,49 +36,23 @@ docker run --rm \
    laravelsail/php81-composer:latest \
    composer install --ignore-platform-reqs
 ```
-⑤sailのエイリアスを登録。
 
-※シェルがbashの場合　　
-
-vimを起動
+⑤Dockerのコンテナ起動
 ```
-vim ~/.bash_profile
-```
-vimで以下を追加
-```
-alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
-```
-vimで追加した後以下のコマンドで反映
-```
-source ~/.bash_profile
-```
-
-※シェルがzshの場合
-
-vimを起動
-```
-vim ~/.zshrc
-```
-以下をvimで追加
-```
-alias sail='./vendor/bin/sail'
-```
-vimで追加した後以下のコマンドで反映
-```
-source ~/.zshrc
-```
-
-⑥Dockerのコンテナ起動
-```
-sail up -d
+./vendor/bin/sail up
 ```
 
 ⑦APP_KEYを更新
 ```
-sail artisan key:generate
+vendor/bin/sail artisan key:generate
 ```
 
 ⑧http://localhost で初期画面がみれる。  
+
+⑨マイグレーションとシーダーのデータをセット  
+```
+vendor/bin/sail artisan migrate --seed
+```
 
 
 
@@ -90,10 +60,10 @@ sail artisan key:generate
 
 ①Dockerのコンテナ停止
 ```
-sail stop
+./vendor/bin/sail stop
 ```
 
 ②DockerのMysql起動
 ```
-sail mysql
+./vendor/bin/sail mysql
 ```
