@@ -62,7 +62,6 @@ class ShopController extends Controller
   public function update(Request $request, Shop $shop)
   {
     $area_id = Area::where('name', $request->area)->pluck('id');
-    Log::info($request->all());
     $genre_id = Genre::where('name', $request->genre)->pluck('id');
 
     if ($request->file('image')) {
