@@ -54,9 +54,19 @@ docker run --rm \
 
 ⑧http://localhost で初期画面がみれる。  
 
-⑨マイグレーションを行う。
+⑨以下のコマンドでMySQLに入る（パスワードはpassword)
 ```
-./vendor/bin/sail artisan migrate
+mysql -h 127.0.0.1 -u root -P 3306 -p
+```  
+  
+⑩MySQLで以下のコマンドでデータベース作成を行い、終わったらexitで出る  
+```
+CREATE DATABASE rese_laravel
+```  
+
+⑨マイグレーションとシーダーデータの投入を行う。
+```
+./vendor/bin/sail artisan migrate --seed
 ```
 
 
