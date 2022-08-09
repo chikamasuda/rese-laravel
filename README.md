@@ -56,7 +56,7 @@ docker run --rm \
 
 ⑨以下のコマンドでMySQLに入る（パスワードはpassword)
 ```
-mysql -h 127.0.0.1 -u root -P 3306 -p
+./vendor/bin/sail mysql
 ```  
   
 ⑩MySQLで以下のコマンドでデータベース作成を行い、終わったらexitで出る  
@@ -73,12 +73,7 @@ CREATE DATABASE rese_laravel
 
 ## その他のよく使うコマンド
 
-①Dockerのコンテナ停止
+・Dockerのコンテナ停止
 ```
 ./vendor/bin/sail stop
-```
-
-②DockerのMysql起動
-```
-./vendor/bin/sail mysql
-```
+````
