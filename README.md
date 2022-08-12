@@ -1,4 +1,5 @@
-# 概要
+# Rese
+## 概要
 WebアプリケーションReseのバックエンドリポジトリ。  
 Webアプリ概要については、以下のReseのフロントエンドリポジトリに記載。  
 
@@ -6,14 +7,14 @@ Webアプリ概要については、以下のReseのフロントエンドリポ�
 https://github.com/chikamasuda/rese-nuxt
 
 
-# 環境構築方法(Laravel Sail)
+## 環境構築方法(Docker)
 
-## 前提条件　　
+### 前提条件　　
 ・Laravel sailを用いて環境構築している。  
 ・Docker Desktopのデスクトップアプリをインストールし、Dockerの状態が「Docker Desktop is running」であること。  
 
 
-## 環境構築
+### 環境構築
 ①git cloneする
 ```
 git clone https://github.com/chikamasuda/rese-laravel.git
@@ -25,11 +26,11 @@ git clone https://github.com/chikamasuda/rese-laravel.git
 ```
 cp .env.example .env
 ```
+④.envファイルのDB_HOSTをmysqlに変更、DB_USERNAMEをrootに変更、DB_PASSWORDをpasswordに変更する  
 
-※Docker起動時にM1Macだとエラーが出るため、M1Mac使用時は以下でrosettaのバージョンアップをする。
-```
-/usr/sbin/softwareupdate --install-rosetta --agree-to-license
-```
+<img width="792" alt="スクリーンショット 2022-08-04 23 12 40" src="https://user-images.githubusercontent.com/66733811/182868852-4d1bddf0-546f-47d1-b76f-b2487681e2e5.png">
+<img width="700" alt="スクリーンショット 2022-08-04 23 26 25" src="https://user-images.githubusercontent.com/66733811/182871964-85b79483-bf0b-44b1-a798-5eda13f6e650.png">
+
 
 ④Composer依存関係のインストール　　
 ```
@@ -40,60 +41,39 @@ docker run --rm \
    laravelsail/php81-composer:latest \
    composer install --ignore-platform-reqs
 ```
-⑤sailのエイリアスを登録。
 
-※シェルがbashの場合　　
-
-vimを起動
+⑤Dockerのコンテナ起動
 ```
-vim ~/.bash_profile
-```
-vimで以下を追加
-```
-alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
-```
-vimで追加した後以下のコマンドで反映
-```
-source ~/.bash_profile
-```
-
-※シェルがzshの場合
-
-vimを起動
-```
-vim ~/.zshrc
-```
-以下をvimで追加
-```
-alias sail='./vendor/bin/sail'
-```
-vimで追加した後以下のコマンドで反映
-```
-source ~/.zshrc
-```
-
-⑥Dockerのコンテナ起動
-```
-sail up -d
+./vendor/bin/sail up -d
 ```
 
 ⑦APP_KEYを更新
 ```
-sail artisan key:generate
+./vendor/bin/sail artisan key:generate
 ```
 
 ⑧http://localhost で初期画面がみれる。  
+
+⑨以下のコマンドでMySQLに入る（パスワードはpassword)
+```
+./vendor/bin/sail mysql
+```  
+  
+⑩MySQLで以下のコマンドでデータベース作成を行い、終わったらexitで出る  
+```
+CREATE DATABASE rese_laravel
+```  
+
+⑨マイグレーションとシーダーデータの投入を行う。
+```
+./vendor/bin/sail artisan migrate --seed
+```
 
 
 
 ## その他のよく使うコマンド
 
-①Dockerのコンテナ停止
+・Dockerのコンテナ停止
 ```
-sail stop
-```
-
-②DockerのMysql起動
-```
-sail mysql
-```
+./vendor/bin/sail stop
+````
