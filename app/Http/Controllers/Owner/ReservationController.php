@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Owner;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Owner;
 use App\Models\Reservation;
 use Illuminate\Support\Carbon;

@@ -9,7 +9,6 @@ use App\Models\Shop;
 use App\Models\Area;
 use App\Models\Genre;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Log;
 
 class ShopController extends Controller
 {

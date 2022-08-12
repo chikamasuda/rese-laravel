@@ -5,12 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Shop;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EmailToUser;
 use App\Mail\RemaindMail;
-use Carbon\Carbon;
 
 class MailController extends Controller
 {

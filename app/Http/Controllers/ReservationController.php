@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ReservationRequest;
 use App\Models\User;
 use App\Models\Reservation;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Log;
 
 class ReservationController extends Controller
 {
