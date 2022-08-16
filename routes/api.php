@@ -69,10 +69,8 @@ Route::controller(ShopController::class)->group(function () {
 /**
  * ログイン後
  */
-
 //ユーザー機能（ログイン後）
 Route::group(['middleware' => 'auth:user', 'verified'], function () {
-
     //ユーザー認証
     Route::controller(AuthController::class)->group(function () {
         //認証が成功した場合は、ユーザー情報を返す
@@ -143,7 +141,6 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
 //オーナー機能（ログイン後）
 Route::group(['middleware' => 'auth:owner'], function () {
-
     //オーナー認証
     Route::controller(OwnerAuthController::class)->group(function () {
         //認証が成功した場合は、ユーザー情報を返す

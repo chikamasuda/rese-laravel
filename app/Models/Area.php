@@ -16,6 +16,6 @@ class Area extends Model
      */
     public function shop()
     {
-        return $this->hasOne(Shop::class, 'area_id');
+        return $this->hasMany(Shop::class);
     }
 }

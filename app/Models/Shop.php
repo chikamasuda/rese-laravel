@@ -30,7 +30,7 @@ class Shop extends Model
      */
     public function area()
     {
-        return $this->hasOne(Area::class, 'id', 'area_id');
+        return $this->belongsTo(Area::class);
     }
 
     /**
@@ -40,7 +40,7 @@ class Shop extends Model
      */
     public function genre()
     {
-        return $this->hasOne(Genre::class, 'id', 'genre_id');
+        return $this->belongsTo(Genre::class);
     }
 
     /**
