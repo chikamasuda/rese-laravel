@@ -28,7 +28,7 @@ class Shop extends Model
      *
      * @return void
      */
-    public function area()
+    public function areas()
     {
         return $this->belongsTo(Area::class);
     }
@@ -38,7 +38,7 @@ class Shop extends Model
      *
      * @return void
      */
-    public function genre()
+    public function genres()
     {
         return $this->belongsTo(Genre::class);
     }

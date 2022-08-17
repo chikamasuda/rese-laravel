@@ -14,7 +14,7 @@ class Area extends Model
      *
      * @return void
      */
-    public function shop()
+    public function shops()
     {
         return $this->hasMany(Shop::class);
     }
